@@ -19,7 +19,7 @@ class BurgerBuilder extends Component{
     state = {
         ingredients : null,
 
-        totalPrice : 1,
+        totalPrice : 0,
 
         //show summary modal.
         showSummaryModal: false,
@@ -29,6 +29,14 @@ class BurgerBuilder extends Component{
         error: ''
     };
 
+    priceList = {
+        'Cheese'        : 1,
+        'Salat'         : 1,
+        'Meat'          : 6,
+        'Top-Bread'     : 1,
+        'Bottom-Bread'  : 1,
+    }
+
     componentDidMount =  () => {
         axiosInstance.get('/ingredients/-LVXhWhIqLVJ8UG3RSxG.json').then((res) => {
             var stateSnapshot = this.state;
@@ -36,8 +44,15 @@ class BurgerBuilder extends Component{
             //update ingredients.
             stateSnapshot.ingredients = res.data;
             
+            console.log('stateSnapshot.ingredients: ' , stateSnapshot.ingredients)
+
             //update loading state.
             stateSnapshot.loading = false;
+
+            //Updating Price.
+            for ( let type in stateSnapshot.ingredients){
+                stateSnapshot.totalPrice += this.priceList[type] || 0;
+            };
 
             this.setState(stateSnapshot);
         }, (error) => {
