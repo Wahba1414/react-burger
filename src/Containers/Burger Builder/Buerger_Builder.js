@@ -30,15 +30,8 @@ class BurgerBuilder extends Component{
         error: ''
     };
 
-    priceList = {
-        'Cheese'        : 1,
-        'Salat'         : 1,
-        'Meat'          : 6,
-        'Top-Bread'     : 1,
-        'Bottom-Bread'  : 1,
-    }
-
     componentDidMount =  () => {
+        this.props.initIngredient();
         // console.log('props: ' , this.props);
         // axiosInstance.get('/ingredients/-LVXhWhIqLVJ8UG3RSxG.json').then((res) => {
         //     var stateSnapshot = this.state;
@@ -155,7 +148,8 @@ class BurgerBuilder extends Component{
 const mapStateToProps = state => {
     return {
       ingredients: state.ingredients.items,
-      totalPrice: state.ingredients.totalPrice
+      totalPrice: state.ingredients.totalPrice,
+      loading: state.initalLoading
     }
 }
 
@@ -164,6 +158,7 @@ const mapDispatchToProps = dispatch => {
     return {
       addIngredient: (ingredient) => dispatch(Actions.addIngredient(ingredient)), 
       removeIngredient: (ingredient) => dispatch(Actions.removeIngredient(ingredient)), 
+      initIngredient: () => dispatch(Actions.initIngredients()), 
     };
   }
 

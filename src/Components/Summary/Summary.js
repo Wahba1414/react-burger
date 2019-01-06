@@ -12,9 +12,9 @@ function summary (props){
     keys.forEach(function(key){
         ingredients.push(
             <li key={key}> 
-                <lable>
+                <label>
                     {key}
-                </lable> 
+                </label> 
                 <label>
                     ( {props.ingredients[key]} )
                 </label> 

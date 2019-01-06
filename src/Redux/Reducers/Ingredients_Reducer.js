@@ -1,16 +1,12 @@
 import * as Actions from '../Actions/Action_Constants';
 
 var initalStore = {
-    items:{
-        'Top-Bread' : 1,
-        'Cheese' : 0,
-        'Salat' : 0,
-        'Meat' : 0,
-        'Bottom-Bread' : 1
-    },
+    items:null,
 
 
-    totalPrice: 2 
+    totalPrice: 0,
+    
+    initalLoading: false
 };
 
 
@@ -53,11 +49,36 @@ function removeIngredient (store,action){
     return updatedStore;
 }
 
+function initIngredients (store, action){
+    var updatedStore = {
+        ...store,
+        items: action.ingredients,
+
+        totalPrice : action.totalPrice,
+        initalLoading: false
+    }
+
+    return updatedStore;
+}
+
+function initIngredientsStart (store, action){
+    var updatedStore = {
+        ...store,
+        initalLoading: true
+    }
+
+    return updatedStore;
+}
+
 export function ingredients (store = initalStore , action){
     switch(action.type){
         case Actions.ADD_INGREDIENT: return addIngredient (store,action);
         
         case Actions.REMOVE_INGREDIENT: return removeIngredient (store,action);
+
+        case Actions.INIT_INGREDIENTS: return initIngredients(store,action);
+
+        case Actions.INIT_INGREDIENTS_START: return initIngredientsStart(store,action);
             
         default: return store;
     }

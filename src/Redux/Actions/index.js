@@ -1,7 +1,9 @@
 //Export the ingredients' action creators.
 export {
     addIngredient,
-    removeIngredient    
+    removeIngredient,
+    initIngredients,
+    initIngredientsStart    
 } from './Ingredients_Actions';
 
 
