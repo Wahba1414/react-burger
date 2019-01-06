@@ -16,7 +16,7 @@ class Checkout extends Component  {
             <div className={Classes.Checkout}>
                 <h1 className={Classes['Checkout-Title']}>Enjoy Your Meal :)</h1>
                 <BurgerIngredients ingredients={this.props.ingredients}/>
-                <UserDetails price={this.props.totalPrice}/>
+                <UserDetails price={this.props.totalPrice} ingredients={this.props.ingredients}/>
             </div>
         )
     }

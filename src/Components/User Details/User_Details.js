@@ -1,5 +1,11 @@
 import React , {Component} from 'react';
 
+import axiosInstance from '../../Utilis/Axios/firebase_instance';
+
+import WithErrorHandling from '../../HOC/Error_Handling/withErrorHandling';
+
+
+
 import Classes from './User_Details.css';
 
 import Button from '../../UI/Button/Button';
@@ -59,6 +65,22 @@ class UserDetails extends Component{
     submitOrder = (event) => {
         event.preventDefault();
         console.log("[inside submitOrder function]");
+
+        //preparing order data.
+        var Order = {
+            ingredients: this.props.ingredients,
+            price: this.props.price.toFixed(2),
+            userDetails: {
+                'Name' : this.state.form['Name'].value,
+                'Address' : this.state.form['Address'].value,
+                'Number' : this.state.form['Number'].value,
+            }
+        };
+
+        axiosInstance.post('/orders/.json', Order).then((res) => {
+            console.log('Order sent')
+        }, (error) => {
+        })
     }
 
     componentDidMount (){
@@ -101,4 +123,4 @@ class UserDetails extends Component{
     }
 }
 
-export default UserDetails;
+export default WithErrorHandling(UserDetails,axiosInstance);
