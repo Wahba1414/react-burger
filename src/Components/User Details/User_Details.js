@@ -62,7 +62,7 @@ class UserDetails extends Component{
         this.setState({formSnapshot})
     }
 
-    submitOrder = (event) => {
+    submitOrder = (event) => { 
         event.preventDefault();
         console.log("[inside submitOrder function]");
  
