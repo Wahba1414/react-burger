@@ -1,0 +1,25 @@
+.Burger-Control{
+    margin: 2% auto;
+    
+}
+
+.Burger-Control > * {
+    margin: 10px;
+    
+}
+
+.Burger-Control label {
+    display: inline-block;
+    width: 1%;
+    margin-right: 10%;
+    color: brown;
+    text-align: center;
+}
+
+@media screen and (max-width: 820px) {
+    .Burger-Control > * {
+        display: block;
+        margin: 10px auto;
+        
+    }
+}

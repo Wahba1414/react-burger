@@ -1,0 +1,55 @@
+.Side_Drawer{
+    color: white;
+    position: fixed;
+    top:0;
+    display: block;
+    width: 100px;
+    height: 100%;
+    background-color: rgb(83, 65, 65);
+
+    z-index: 200;
+}
+
+.Logo{
+    position: fixed;
+    margin-right: 20px;
+    padding: 10px 0 ;
+}
+
+.Nav_Items{
+   float: left;
+   width: 100%;
+}
+
+.Nav_Items ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.Nav_Items li{
+    display: block;
+    height: 100%;
+    margin-bottom: 10px;
+    border: none;
+}
+
+.Nav_Items a{
+    text-decoration: none;
+    color: white;
+    display: block;
+    width: 100%;
+    padding: 10px 10px ;
+}
+
+.Nav_Items a:hover{
+    background-color: rgb(153, 93, 93);
+}
+
+
+@media screen and (min-width: 400px) {
+    .Side_Drawer{
+        display: none;
+    }
+  }

@@ -1,0 +1,17 @@
+.Burger-Controls{
+    width: 60%;
+    margin:  auto;
+    text-align: center;
+    border: .5px ridge brown;
+}
+
+.Price{
+    color: brown;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+    margin: 10px 0;
+}
+
+.Checkout{
+    margin-bottom: 10px;
+}

@@ -1,0 +1,101 @@
+/* Adding different sizes in the future */
+.Success{
+    background-color: rgb(9, 83, 11);
+    border: none;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    width: 100px;
+    min-width: auto;
+    cursor: pointer;
+}
+
+.Success:hover {
+    background-color: rgb(6, 49, 7);
+}
+
+
+.Danger{
+    background-color: red;
+    border: none;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    width: 100px;
+    cursor: pointer;
+}
+
+.Danger:hover {
+    background-color: rgb(80, 10, 10);
+}
+
+
+
+.Warning{
+    background-color: yellow;
+    border: none;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    width: 15%;
+    cursor: pointer;
+}
+
+.Gray{
+    background-color: gray;
+    border: none;
+    color: black;
+    padding: 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    min-width: auto;
+    cursor: pointer;
+}
+
+
+.Black{
+    background-color: black;
+    border: none;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    width: auto;
+    cursor: pointer;
+}
+
+.Action{
+    background-color: brown;
+    border: none;
+    color: white;
+    padding: 10px 40px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    width: auto;
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+.Action:hover{
+    background-color: rgb(105, 20, 20);
+}
+
+.Action:disabled{
+    background-color: rgb(175, 172, 172);
+    cursor:not-allowed;
+}

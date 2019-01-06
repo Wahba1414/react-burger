@@ -1,0 +1,100 @@
+.Toolbar{
+    color: white;
+    position: fixed;
+    top:0;
+    display: block;
+    width: 100%;
+    height: 40px;
+    background-color: rgb(83, 65, 65);
+    padding: 0;
+    z-index: 100;
+}
+
+.ToggleSideDrawer{
+    float: left;
+    padding: 10px  0px;
+    display: none;
+    background-color: rgb(83, 65, 65);
+    display: block;
+    width: 40px;
+    height: 100%;
+    margin: 0;
+    border: 0;
+    cursor: pointer;
+    display: none;
+}
+
+.Toggle-Icon{
+    color: white;
+    font-size: 20px;
+}
+
+.Logo{
+    float: left;
+    margin-left: 10px;
+    padding: 5px 0 ;
+    cursor: pointer;
+}
+
+.Logo img{
+    width: 50px;
+    height: 30px;
+}
+
+.Logo a{
+    text-decoration: none;
+    color: white;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.Nav_Items{
+   float: right;
+   height: 100%;
+}
+
+.Nav_Items ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.Nav_Items li{
+    display: inline-block;
+    height: 100%;
+    margin-left: 10px;
+}
+
+.Nav_Items a{
+    text-decoration: none;
+    color: white;
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 10px 10px ;
+}
+
+.Nav_Items a:hover{
+    background-color: rgb(153, 93, 93);
+}
+
+
+@media screen and (max-width: 400px) {
+    .Nav_Items{
+        display: none;
+    }
+
+    .Logo{
+        position: fixed;
+        top: 0;
+        left: 40%;
+        right: 60%;
+        color: white;
+    }
+    .ToggleSideDrawer{
+        display: inline;
+    }
+     
+  }
