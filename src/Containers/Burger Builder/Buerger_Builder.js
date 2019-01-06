@@ -1,26 +1,53 @@
 import React , {Component} from 'react';
 
+import axiosInstance from '../../Utilis/Axios/firebase_instance';
+
+
 import BurgerIngredients from '../../Components/Burger Ingredients/Burger_Ingredients';
 import BurgerControls from '../../Components/Burger Controls/Burger_Controls';
 import Summary from '../../Components/Summary/Summary';
 import Modal from '../../UI/Modal/Modal';
+import Spinner from '../../Utilis/Spinner/Spinner';
+import Error from '../../Utilis/Error/Error';
 
 import Classes from './Buerger_Builder.css';
 
 class BurgerBuilder extends Component{
     state = {
-        ingredients : {
-            'Top-Bread' : 1,
-            'Salat' : 0,
-            'Meat' : 0,
-            'Cheese' : 0,
-            'Bottom-Bread' : 1,
-        },
+        ingredients : null,
 
         totalPrice : 1,
 
         //show summary modal.
         showSummaryModal: false,
+
+        loading : true, 
+
+        error: ''
+    };
+
+    componentDidMount =  () => {
+        console.log('[Inside burger_builder componentDidMount]');
+
+        axiosInstance.get('/ingredients/-LVXhWhIqLVJ8UG3RSxG.json').then((res) => {
+            var stateSnapshot = this.state;
+            
+            //update ingredients.
+            stateSnapshot.ingredients = res.data;
+            
+            //update loading state.
+            stateSnapshot.loading = false;
+
+            this.setState(stateSnapshot);
+        }, (error) => {
+            //update loading state.
+            var stateSnapshot = this.state;
+            stateSnapshot.loading = false;
+            stateSnapshot.error = 'Error happened during retrieving the initial ingredients';
+            this.setState(stateSnapshot);
+            // console.log('error => ' , error);
+        })
+
     };
 
     //Enable checkout button.
@@ -114,11 +141,23 @@ class BurgerBuilder extends Component{
 
     }
 
+   
     render () {
+        //Handling the request delay of ingredients by Spinner.
+        var ingredients = null;
+        if(this.state.error){
+            ingredients = (
+            <Error> 
+                {this.state.error}
+            </Error>);
+        }else{
+            ingredients = (!this.state.loading) ? (<BurgerIngredients ingredients={this.state.ingredients}/>) : (<Spinner />);
+        }
+
         return(
             <React.Fragment>
                 <h1 className={Classes['Builder-Title']}>Build Your Burger :)</h1>
-                <BurgerIngredients ingredients={this.state.ingredients}/>
+                {ingredients}
                 <BurgerControls 
                 totalPrice = {this.state.totalPrice}
                 addIngredient={this.addIngredient} 
