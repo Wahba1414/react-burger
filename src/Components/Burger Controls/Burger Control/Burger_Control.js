@@ -9,8 +9,8 @@ function burgerControl (props){
     return(
         <div className={Classes['Burger-Control']}>
             <label>{props.type}</label>
-            <Button type='Success' clicked={() => props.addIngredient(props.type)}>Add</Button>
-            <Button type='Danger' clicked={() => props.removeIngredient(props.type)}>Remove</Button>
+            <Button type='Danger' clicked={() => props.removeIngredient(props.type)}>Less</Button>
+            <Button type='Success' clicked={() => props.addIngredient(props.type)}>More</Button>
         </div>
     );
 }

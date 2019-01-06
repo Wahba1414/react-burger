@@ -11,7 +11,14 @@ function summary (props){
     var keys = Object.keys(props.ingredients);
     keys.forEach(function(key){
         ingredients.push(
-            <li key={key}> {key} : {props.ingredients[key]} </li>
+            <li key={key}> 
+                <lable>
+                    {key}
+                </lable> 
+                <label>
+                    ( {props.ingredients[key]} )
+                </label> 
+            </li>
         )
     })
 
@@ -23,7 +30,10 @@ function summary (props){
 
             <div className={Classes['Burger-Ingredients']}>
                 <div className={Classes['Ingredient-Title']}>
-                    <label>Burger Ingredient</label>
+                    <label>
+                        Burger Ingredient
+                        <hr />
+                    </label>
                 </div>
                 <ul>
                     {ingredients}
@@ -36,8 +46,8 @@ function summary (props){
 
             <div className={Classes['Summary-Controls']}>
                 {/* Buttons */}
-                <Button type='Success' clicked={props.toCheckout}>Proceed</Button>
                 <Button type='Danger' clicked={props.cancelSummary}>Cancel</Button>
+                <Button type='Success' clicked={props.toCheckout}>Proceed</Button>
             </div>
 
         </div>
