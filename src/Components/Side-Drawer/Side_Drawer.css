@@ -47,6 +47,10 @@
     background-color: rgb(153, 93, 93);
 }
 
+.Is-Active{
+    color: red;
+    background-color: rgb(153, 93, 93);
+}
 
 @media screen and (min-width: 400px) {
     .Side_Drawer{

@@ -2,7 +2,7 @@ import React from 'react';
 
 import Classes from './Side_Drawer.css';
 
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 
 function sideDrawer (props) {
@@ -11,14 +11,14 @@ function sideDrawer (props) {
             <div className={Classes.Nav_Items}>
                 <ul>
                     <li>
-                        <Link to='/'>
+                        <NavLink activeClassName={Classes['Is-Active']} to='/Burger_APP/'>
                             Burger Builder
-                        </Link>
+                        </NavLink>
                     </li>
                     <li>
-                        <Link to='/Checkout'>
-                            Checkout
-                        </Link>
+                        <NavLink activeClassName={Classes['Is-Active']} to='/Orders'>
+                            Orders
+                        </NavLink>
                     </li>
                 </ul>
             </div>

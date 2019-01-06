@@ -4,7 +4,7 @@ import Classes from './Toolbar.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
-import { Link } from "react-router-dom";
+import { Link , NavLink} from "react-router-dom";
 
 
 function toolbar (props) {
@@ -23,14 +23,14 @@ function toolbar (props) {
             <div className={Classes.Nav_Items}>
                 <ul>
                     <li>
-                        <Link to='/'>                           
+                        <NavLink activeClassName={Classes['Is-Active']} to='/Burger_APP/'>                    
                             Burger Builder
-                        </Link>
+                        </NavLink>
                     </li>
                     <li>
-                        <Link to='/Checkout'>
-                            Checkout
-                        </Link>
+                        <NavLink  activeClassName={Classes['Is-Active']} to='/Orders'>
+                            Orders
+                        </NavLink>
                     </li>
                 </ul>
             </div>

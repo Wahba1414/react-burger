@@ -1,11 +1,12 @@
 import React , {Component} from 'react';
-import {Switch,Route} from "react-router-dom";
+import {Switch,Route,Redirect} from "react-router-dom";
 
 import Toolbar from '../Toolbar/Toolbar';
 import SideDrawer from '../Side-Drawer/Side_Drawer';
 import Backdrop from '../../UI/Backdrop/Backdrop';
 import BurgerBuilder from '../../Containers/Burger Builder/Buerger_Builder';
 import Checkout from '../../Containers/Checkout/Checkout';
+import Orders from '../../Containers/Orders/Order';
 
 import Classes from './Layout.css';
 
@@ -38,7 +39,7 @@ class Layout extends Component  {
                 {sideDrawer}
 
                 {/* app routes */}
-                <Switch>
+                {/* <Switch>
                     <Route 
                         path='/Checkout'
                         component={Checkout}
@@ -47,7 +48,27 @@ class Layout extends Component  {
                         path='/'
                         component={BurgerBuilder}
                     />
+                </Switch> */}
+                <Switch>
+                    <Route
+                        path='/Orders'
+                        component={Orders}
+                    />
+                    <Route 
+                        path='/Burger_APP/Checkout'
+                        component={Checkout}
+                    />
+                    <Route 
+                        exact
+                        path='/Burger_APP/'
+                        component={BurgerBuilder}
+                    />
+
+                    <Redirect to="/Burger_APP/"/>
                 </Switch>
+                
+
+                
                
             </div>
         );
