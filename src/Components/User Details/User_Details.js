@@ -65,7 +65,7 @@ class UserDetails extends Component{
     submitOrder = (event) => {
         event.preventDefault();
         console.log("[inside submitOrder function]");
-
+ 
         //preparing order data.
         var Order = {
             ingredients: this.props.ingredients,
