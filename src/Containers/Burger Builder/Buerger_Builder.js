@@ -3,14 +3,17 @@ import React , {Component} from 'react';
 import axiosInstance from '../../Utilis/Axios/firebase_instance';
 
 
+
 import BurgerIngredients from '../../Components/Burger Ingredients/Burger_Ingredients';
 import BurgerControls from '../../Components/Burger Controls/Burger_Controls';
 import Summary from '../../Components/Summary/Summary';
 import Modal from '../../UI/Modal/Modal';
 import Spinner from '../../Utilis/Spinner/Spinner';
 import Error from '../../Utilis/Error/Error';
+import WithErrorHandling from '../../HOC/Error_Handling/withErrorHandling';
 
 import Classes from './Buerger_Builder.css';
+
 
 class BurgerBuilder extends Component{
     state = {
@@ -27,8 +30,6 @@ class BurgerBuilder extends Component{
     };
 
     componentDidMount =  () => {
-        console.log('[Inside burger_builder componentDidMount]');
-
         axiosInstance.get('/ingredients/-LVXhWhIqLVJ8UG3RSxG.json').then((res) => {
             var stateSnapshot = this.state;
             
@@ -181,4 +182,4 @@ class BurgerBuilder extends Component{
 
 }
 
-export default BurgerBuilder;
+export default WithErrorHandling(BurgerBuilder, axiosInstance);
