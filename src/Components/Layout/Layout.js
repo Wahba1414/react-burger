@@ -6,7 +6,7 @@ import SideDrawer from '../Side-Drawer/Side_Drawer';
 import Backdrop from '../../UI/Backdrop/Backdrop';
 import BurgerBuilder from '../../Containers/Burger Builder/Buerger_Builder';
 import Checkout from '../../Containers/Checkout/Checkout';
-import Orders from '../../Containers/Orders/Order';
+import Orders from '../../Containers/Orders/Orders';
 
 import Classes from './Layout.css';
 
@@ -50,14 +50,15 @@ class Layout extends Component  {
                     />
                 </Switch> */}
                 <Switch>
-                    <Route
-                        path='/Orders'
-                        component={Orders}
-                    />
                     <Route 
                         path='/Burger_APP/Checkout'
                         component={Checkout}
                     />
+                    <Route 
+                        path='/Orders'
+                        component={Orders}
+                    />
+
                     <Route 
                         exact
                         path='/Burger_APP/'
