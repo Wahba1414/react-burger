@@ -4,7 +4,7 @@ import axiosInstance from '../../Utilis/Axios/firebase_instance';
 
 import WithErrorHandling from '../../HOC/Error_Handling/withErrorHandling';
 
-
+import Spinner from '../../Utilis/Spinner/Spinner';
 
 import Classes from './User_Details.css';
 
@@ -52,7 +52,8 @@ class UserDetails extends Component{
             }
         },
 
-        enableOrdering: false
+        enableOrdering: false,
+        purchasing: false,
     };
 
     //Invalid styles.
@@ -127,6 +128,11 @@ class UserDetails extends Component{
         event.preventDefault();
         console.log("[inside submitOrder function]");
  
+        //Sending order inprogress...
+        var stateSnapshot = this.state;
+        stateSnapshot.purchasing = true;
+        this.setState({stateSnapshot});
+
         //preparing order data.
         var Order = {
             ingredients: this.props.ingredients,
@@ -144,7 +150,10 @@ class UserDetails extends Component{
             //Back to the main page.
             this.props.history.push('/');
         }, (error) => {
-            //No thing for now.
+            //reset back.
+            var stateSnapshot = this.state;
+            stateSnapshot.purchasing = true;
+            this.setState({stateSnapshot});
         });
     }
 
@@ -174,7 +183,7 @@ class UserDetails extends Component{
             )
         });
 
-        return (
+        var elementsToRender = this.state.purchasing ? (<Spinner />) : (
             <div className={Classes['User-Details']}>
                 <div className={Classes['Price']}>
                     <label>Total Price: {this.props.price.toFixed(2)}</label>
@@ -192,6 +201,10 @@ class UserDetails extends Component{
                     </Button>
                 </form>
             </div>
+        )
+
+        return (
+            elementsToRender
         );
     }
 }
