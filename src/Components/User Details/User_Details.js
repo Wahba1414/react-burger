@@ -17,6 +17,7 @@ class UserDetails extends Component{
         this.textInput = React.createRef();
     };
     
+    
     //creating form data.
     state = {
         form : {
@@ -27,6 +28,7 @@ class UserDetails extends Component{
                     'placeholder'  : 'Your Name ..'
                 },
                 valid: true,
+                touched: false,
             },
 
             'Address' : {
@@ -36,6 +38,7 @@ class UserDetails extends Component{
                     'placeholder'  : 'Your Address ..'
                 },
                 valid: true,
+                touched: false,
             },
 
             'Number' : {
@@ -45,8 +48,11 @@ class UserDetails extends Component{
                     'placeholder'  : 'Your Phone Number ..'
                 },
                 valid: true,
+                touched: false,
             }
-        }
+        },
+
+        enableOrdering: false
     };
 
     //Invalid styles.
@@ -54,12 +60,67 @@ class UserDetails extends Component{
         border: '2px solid red'
     };
 
+
+    //function to validate form inputs.
+    validateInputs = (key, value) => {
+        // console.log('[Inside validateInputs function]');
+        var trimedValue = value.trim();
+        var isvalid = false;
+
+        switch(key){
+            case 'Name':
+                if(trimedValue.length >= 6){
+                    isvalid = true;
+                }else{
+                    isvalid = false;
+                }
+                break;
+
+            case 'Address': 
+                if(trimedValue.length >= 15){
+                    isvalid = true;
+                }else{
+                    isvalid = false;
+                }
+                break;
+
+            case 'Number': 
+                var phoneRegex = new  RegExp(/^((\+1)|1)? ?\(?(\d{3})\)?[ .-]?(\d{3})[ .-]?(\d{4})( ?(ext\.? ?|x)(\d*))?$/);
+                isvalid = phoneRegex.test(trimedValue)
+                break;
+
+            default: 
+                break;    
+        }
+
+        return isvalid;
+
+    }
+
     changeHandler = (event,key) =>{
-        console.log("Inside changeHandler function");
+        // console.log("Inside changeHandler function");
+        var stateSnapshot = this.state;
+        stateSnapshot.form[key].value = event.target.value;
+        this.setState({stateSnapshot});
+
         // here can add the needed validations.
-        var formSnapshot = this.state.form;
-        formSnapshot[key].value = event.target.value;
-        this.setState({formSnapshot})
+        var isValid = this.validateInputs(key,event.target.value);
+        stateSnapshot = this.state;
+        stateSnapshot.form[key].valid = isValid;
+        stateSnapshot.form[key].touched = true;
+
+        //Ready for enabling ordering.
+        var enableOrdering = true;
+        for(let item in stateSnapshot.form){
+            if ( !(stateSnapshot.form[item].touched && stateSnapshot.form[item].valid) ){
+                enableOrdering = false;
+            }
+        };
+
+        
+        stateSnapshot.enableOrdering = enableOrdering;
+       
+        this.setState({stateSnapshot});
     }
 
     submitOrder = (event) => { 
@@ -78,9 +139,13 @@ class UserDetails extends Component{
         };
 
         axiosInstance.post('/orders/.json', Order).then((res) => {
-            console.log('Order sent')
+            console.log('Order sent');
+
+            //Back to the main page.
+            this.props.history.push('/');
         }, (error) => {
-        })
+            //No thing for now.
+        });
     }
 
     componentDidMount (){
@@ -89,6 +154,7 @@ class UserDetails extends Component{
     }
 
     render =  () => {
+        console.log(this.props);
         var formDom = [];
 
         //preparing the form dom elements.
@@ -116,7 +182,14 @@ class UserDetails extends Component{
                 {/* form details */}
                 <form className={Classes['User-Details-Form']}>
                     {formDom}
-                    <Button extraClass={Classes['Checkout']} type='Action' clicked={this.submitOrder}>Order</Button>
+                    <Button 
+                        hide = {!this.state.enableOrdering}
+                        extraClass={Classes['Checkout']} 
+                        type='Action' 
+                        clicked={this.submitOrder}
+                    >
+                    Order
+                    </Button>
                 </form>
             </div>
         );

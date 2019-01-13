@@ -2,7 +2,7 @@
     display: block;
     height: 80px;
     background: linear-gradient(#bc581e, #e27b36);
-    width: 40%;
+    width: 30%;
     margin: 10px auto;
     border-radius: 50% 50% 0px 0px;
     position: relative;
@@ -13,7 +13,7 @@
     display: block;
     height: 80px;
     background: linear-gradient(#F08E4A, #e27b36);
-    width: 40%;
+    width: 30%;
     margin: 10px auto;
     border-radius: 5% 5% 10px 10px;
 }
@@ -22,7 +22,7 @@
     display: block;
     height: 20px;
     background-color: green;
-    width: 42%;
+    width: 32%;
     margin: 10px auto;
     border-radius: 5px 5px 5px 5px;
 }
@@ -31,7 +31,7 @@
     display: block;
     height: 20px;
     background-color: rgb(255, 251, 0);
-    width: 42%;
+    width: 32%;
     margin: 10px auto;
     border-radius: 5px 5px 5px 5px;
 }
@@ -40,7 +40,7 @@
     display: block;
     height: 20px;
     background-color: brown;
-    width: 40%;
+    width: 30%;
     margin: 10px auto;
     border-radius: 5px 5px 5px 5px;
 }
