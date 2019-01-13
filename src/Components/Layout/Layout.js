@@ -1,14 +1,20 @@
-import React , {Component} from 'react';
+import React , {Component , Suspense} from 'react';
 import {Switch,Route,Redirect} from "react-router-dom";
 
 import Toolbar from '../Toolbar/Toolbar';
 import SideDrawer from '../Side-Drawer/Side_Drawer';
 import Backdrop from '../../UI/Backdrop/Backdrop';
 import BurgerBuilder from '../../Containers/Burger Builder/Buerger_Builder';
-import Checkout from '../../Containers/Checkout/Checkout';
-import Orders from '../../Containers/Orders/Orders';
+import Spinner from '../../Utilis/Spinner/Spinner';
 
 import Classes from './Layout.css';
+
+// import Orders from '../../Containers/Orders/Orders';
+
+//Lazy loading
+const LazyOrders    = React.lazy(() => import('../../Containers/Orders/Orders'));
+const LazyCheckout  = React.lazy(() => import('../../Containers/Checkout/Checkout'));
+
 
 class Layout extends Component  {
     //Initializing the state object.
@@ -49,24 +55,26 @@ class Layout extends Component  {
                         component={BurgerBuilder}
                     />
                 </Switch> */}
-                <Switch>
-                    <Route 
-                        path='/Burger_APP/Checkout'
-                        component={Checkout}
-                    />
-                    <Route 
-                        path='/Orders'
-                        component={Orders}
-                    />
+                <Suspense fallback={<Spinner />}>  
+                    <Switch>
+                        <Route 
+                            path='/Burger_APP/Checkout'
+                            component={LazyCheckout}
+                        />
+                        <Route 
+                            path='/Orders'
+                            component={LazyOrders}
+                        />
 
-                    <Route 
-                        exact
-                        path='/Burger_APP/'
-                        component={BurgerBuilder}
-                    />
+                        <Route 
+                            exact
+                            path='/Burger_APP/'
+                            component={BurgerBuilder}
+                        />
 
-                    <Redirect to="/Burger_APP/"/>
-                </Switch>
+                        <Redirect to="/Burger_APP/"/>
+                    </Switch>
+                </Suspense>
                 
 
                 
