@@ -1,11 +1,11 @@
 .Order{
     margin: 20px auto;
     padding: 20px;
-    border: 2px solid rgb(163, 153, 255);
-    color: rgb(87, 87, 240);
+    border: 2px solid rgb(155, 107, 107);
+    color: rgb(93, 51, 51);
     font-family: 'Times New Roman', Times, serif;
     font-size: 20px;
-    box-shadow: 1px 1px  rgb(163, 153, 255);
+    box-shadow: 1px 1px  rgb(155, 107, 107);
 }
 
 .Ingredients-Title{
