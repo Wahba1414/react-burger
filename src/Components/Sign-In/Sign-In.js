@@ -131,14 +131,26 @@ class SignIn extends Component{
                 {/* form details */}
                 <form className={Classes['Sign-In-Form']}>
                     {formDom}
-                    <Button 
-                        hide = {!this.state.enableOrdering}
-                        extraClass={Classes['Checkout']} 
-                        type='Action' 
-                        clicked={this.submitOrder}
-                    >
-                    Order
-                    </Button>
+                    <div>
+                        <Button 
+                            hide = {!this.state.enableOrdering}
+                            extraClass={Classes['Checkout']} 
+                            type='Success-Transparent' 
+                            clicked={this.submitOrder}
+                        >
+                        Sign in
+                        </Button>
+                    </div>
+                    <div>
+                        <Button 
+                            extraClass={Classes['Checkout']} 
+                            type='Danger-Transparent' 
+                            clicked={this.submitOrder}
+                        >
+                        Create New Account
+                        </Button>
+                    </div>
+
                 </form>
             </div>
         );

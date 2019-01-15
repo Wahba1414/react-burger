@@ -19,6 +19,32 @@
 }
 
 
+.Success-Transparent{
+    background-color: transparent;
+    border: none;
+    color: green;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    width: 100px;
+    min-width: auto;
+    cursor: pointer;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.Success-Transparent:hover {
+    background-color: transparent;
+}
+
+.Success-Transparent:disabled{
+    background-color: transparent;
+    cursor:not-allowed;
+    /* color: gray; */
+}
+
 .Danger{
     background-color: red;
     border: none;
@@ -37,6 +63,30 @@
     background-color: rgb(80, 10, 10);
 }
 
+.Danger-Transparent{
+    background-color: transparent;
+    border: none;
+    color: red;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    width: auto;
+    cursor: pointer;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.Danger-Transparent:hover {
+    background-color: transparent;
+}
+
+.Danger-Transparent:disabled{
+    background-color: transparent;
+    cursor:not-allowed;
+    /* color: gray; */
+}
 
 
 .Warning{

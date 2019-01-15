@@ -164,7 +164,7 @@ class SignIn extends Component{
         keys.forEach((key) => {
             formDom.push(
                 <div key={key}  className={Classes['Form-Item']}> 
-                    <label>{key}</label>
+                    <label>{key} *</label>
                     <input
                     ref={(key === keys[0]) ? this.textInput: null} 
                     {...this.state.form[key].configs} 
@@ -181,14 +181,25 @@ class SignIn extends Component{
                 {/* form details */}
                 <form className={Classes['Sign-Up-Form']}>
                     {formDom}
-                    <Button 
-                        hide = {!this.state.enableOrdering}
-                        extraClass={Classes['Checkout']} 
-                        type='Action' 
-                        clicked={this.submitOrder}
-                    >
-                    Order
-                    </Button>
+                    <div>
+                        <Button 
+                            hide = {!this.state.enableOrdering}
+                            extraClass={Classes['Checkout']} 
+                            type='Success-Transparent' 
+                            clicked={this.submitOrder}
+                        >
+                        Sign up
+                        </Button>
+                    </div>
+                    <div>
+                        <Button 
+                            extraClass={Classes['Checkout']} 
+                            type='Danger-Transparent' 
+                            clicked={this.submitOrder}
+                        >
+                        Already have an account
+                        </Button>
+                    </div>
                 </form>
             </div>
         );
