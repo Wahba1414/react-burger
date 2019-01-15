@@ -12,7 +12,7 @@ function button (props){
     buttonClasses = buttonClasses.join(' ');
 
     return(
-        <button disabled={props.hide} className={buttonClasses} onClick={props.clicked}>
+        <button disabled={props.disable} className={buttonClasses} onClick={props.clicked}>
             {props.children}
         </button>
     );

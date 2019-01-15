@@ -192,7 +192,7 @@ class UserDetails extends Component{
                 <form className={Classes['User-Details-Form']}>
                     {formDom}
                     <Button 
-                        hide = {!this.state.enableOrdering}
+                        disable = {!this.state.enableOrdering}
                         extraClass={Classes['Checkout']} 
                         type='Action' 
                         clicked={this.submitOrder}

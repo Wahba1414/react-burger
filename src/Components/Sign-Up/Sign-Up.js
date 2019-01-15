@@ -183,7 +183,7 @@ class SignIn extends Component{
                     {formDom}
                     <div>
                         <Button 
-                            hide = {!this.state.enableOrdering}
+                            disable = {!this.state.enableOrdering}
                             extraClass={Classes['Checkout']} 
                             type='Success-Transparent' 
                             clicked={this.submitOrder}

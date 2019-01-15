@@ -24,7 +24,7 @@ function burgerControls (props){
             removeIngredient={props.removeIngredient} 
             type='Cheese'/>
 
-            <Button hide={props.disableCheckOut} extraClass={Classes['Checkout']} type='Action' clicked={props.checkoutClicked}>Checkout</Button>
+            <Button disable={props.disableCheckOut} extraClass={Classes['Checkout']} type='Action' clicked={props.checkoutClicked}>Checkout</Button>
 
         </div>
     );
