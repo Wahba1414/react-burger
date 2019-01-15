@@ -3,6 +3,9 @@ import {Switch,Route,Redirect} from "react-router-dom";
 
 import Toolbar from '../Toolbar/Toolbar';
 import SideDrawer from '../Side-Drawer/Side_Drawer';
+
+import Auth from '../../Containers/Auth/Auth';
+
 import Backdrop from '../../UI/Backdrop/Backdrop';
 import BurgerBuilder from '../../Containers/Burger Builder/Buerger_Builder';
 import Spinner from '../../Utilis/Spinner/Spinner';
@@ -64,6 +67,11 @@ class Layout extends Component  {
                         <Route 
                             path='/Orders'
                             component={LazyOrders}
+                        />
+
+                        <Route 
+                            path='/Auth'
+                            component={Auth}
                         />
 
                         <Route 

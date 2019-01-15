@@ -1,11 +1,11 @@
-.User-Details{
+.Sign-In{
     margin: 10px auto;
     width: 60%;
     border: 1px solid brown;
 }
 
 
-.User-Details-Form{
+.Sign-In-Form{
     width: 100%;
     height: 100%;
     padding: 20px;
@@ -37,11 +37,4 @@
 
 .Form-Item input:focus{
     background-color: rgb(200, 196, 196);;
-}
-
-.Price{
-    color: brown;
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 20px;
-    margin: 10px 0;
 }

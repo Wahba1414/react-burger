@@ -32,6 +32,12 @@ function toolbar (props) {
                             Orders
                         </NavLink>
                     </li>
+
+                    <li>
+                        <NavLink  activeClassName={Classes['Is-Active']} to='/Auth'>
+                            Authentication
+                        </NavLink>
+                    </li>
                 </ul>
             </div>
         </div>
