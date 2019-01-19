@@ -1,5 +1,9 @@
 import React , {Component} from 'react';
 
+import { connect } from 'react-redux';
+
+import * as Actions from '../../Redux/Actions/index';
+
 import axiosInstance from '../../Utilis/Axios/firebase_instance';
 
 import WithErrorHandling from '../../HOC/Error_Handling/withErrorHandling';
@@ -9,6 +13,9 @@ import Spinner from '../../Utilis/Spinner/Spinner';
 import Classes from './User_Details.css';
 
 import Button from '../../UI/Button/Button';
+
+import Auth_Utilis from '../../Utilis/Auth/Auth';
+
 
 class UserDetails extends Component{
     constructor(props) {
@@ -128,42 +135,60 @@ class UserDetails extends Component{
         event.preventDefault();
         console.log("[inside submitOrder function]");
  
-        //Sending order inprogress...
-        var stateSnapshot = this.state;
-        stateSnapshot.purchasing = true;
-        this.setState({stateSnapshot});
+        //checking if the user still logged in or not.
+        var isLoggedIn = Auth_Utilis.isLoggedIn();
+        if(isLoggedIn){
+            var userID = localStorage.getItem('userId');
+            var token = localStorage.getItem('token');
+            var queryParams = '?auth=' + token;
 
-        //preparing order data.
-        var Order = {
-            ingredients: this.props.ingredients,
-            price: this.props.price.toFixed(2),
-            userDetails: {
-                'Name' : this.state.form['Name'].value,
-                'Address' : this.state.form['Address'].value,
-                'Number' : this.state.form['Number'].value,
-            }
-        };
-
-        axiosInstance.post('/orders/.json', Order).then((res) => {
-            console.log('Order sent');
-
-            //Back to the main page.
-            this.props.history.push('/');
-        }, (error) => {
-            //reset back.
+            //Sending order inprogress...
             var stateSnapshot = this.state;
-            stateSnapshot.purchasing = false;
+            stateSnapshot.purchasing = true;
             this.setState({stateSnapshot});
-        });
+
+            //preparing order data.
+            var Order = {
+                ingredients: this.props.ingredients,
+                price: this.props.price.toFixed(2),
+                userDetails: {
+                    'Name' : this.state.form['Name'].value,
+                    'Address' : this.state.form['Address'].value,
+                    'Number' : this.state.form['Number'].value,
+                },
+
+                userID: userID
+
+            };
+
+            axiosInstance.post('/orders/.json' + queryParams, Order).then((res) => {
+                // console.log('Order sent');
+
+                //Back to the main page.
+                this.props.history.push('/Orders');
+            }, (error) => {
+                //reset back.
+                var stateSnapshot = this.state;
+                stateSnapshot.purchasing = false;
+                this.setState({stateSnapshot});
+            });
+        }else{
+            //Dispatch Logout redux action.
+            this.props.loggedOut();
+            //Go to 'Sign in' view.
+            this.props.history.push('/Auth');
+        }
+
+        
     }
 
     componentDidMount (){
-        console.log("[Inside componentDidMount function]");
+        // console.log("[Inside componentDidMount function]");
         this.textInput.current.focus();
     }
 
     render =  () => {
-        console.log(this.props);
+        // console.log(this.props);
         var formDom = [];
 
         //preparing the form dom elements.
@@ -209,4 +234,17 @@ class UserDetails extends Component{
     }
 }
 
-export default WithErrorHandling(UserDetails,axiosInstance);
+const mapStateToProps = state => {
+    return {
+        loggedIn: state.auth.loggedIn,
+    }
+}
+
+
+const mapDispatchToProps = dispatch => {
+    return {
+      loggedOut: () => dispatch(Actions.logOut()), 
+    };
+  }
+
+export default connect(mapStateToProps,mapDispatchToProps)(WithErrorHandling(UserDetails,axiosInstance));
