@@ -9,7 +9,8 @@ export {
 
 //Export the Auth' action creators.
 export {
-    logIn    
+    logIn,
+    logOut    
 } from './Auth_Actions';
 
 

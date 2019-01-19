@@ -8,3 +8,10 @@ export const logIn = function(){
         type: ActionTypes.LOG_IN
     });
 }
+
+
+export const logOut = function(){
+    return ({
+        type: ActionTypes.LOG_OUT
+    });
+}

@@ -1,5 +1,7 @@
 import React , {Component , Suspense} from 'react';
-import {Switch,Route,Redirect} from "react-router-dom";
+import { connect } from 'react-redux';
+
+import {Switch,Route,Redirect,withRouter} from "react-router-dom";
 
 import Toolbar from '../Toolbar/Toolbar';
 import SideDrawer from '../Side-Drawer/Side_Drawer';
@@ -42,6 +44,52 @@ class Layout extends Component  {
             </React.Fragment>
         ) : null;
 
+
+        var AvailableRoutes = this.props.loggedIn ? (
+            <Switch>
+                <Route 
+                    path='/Burger_APP/Checkout'
+                    component={LazyCheckout}
+                />
+                
+                <Route 
+                    path='/Orders'
+                    component={LazyOrders}
+                />
+
+                <Route 
+                    path='/Auth'
+                    component={Auth}
+                />
+
+                <Route 
+                    exact
+                    path='/Burger_APP/'
+                    component={BurgerBuilder}
+                />
+
+                <Redirect to="/Burger_APP/"/>
+            </Switch>) : (
+            <Switch>
+                <Route 
+                    path='/Burger_APP/Checkout'
+                    component={LazyCheckout}
+                />
+                
+                <Route 
+                    path='/Auth'
+                    component={Auth}
+                />
+
+                <Route 
+                    exact
+                    path='/Burger_APP/'
+                    component={BurgerBuilder}
+                />
+
+                <Redirect to="/Burger_APP/"/>
+            </Switch>);
+
         return(
             <div className={Classes.Layout}>
                 <Toolbar  toggleSideDrawer={this.toggleSideDrawer}/>  
@@ -59,29 +107,7 @@ class Layout extends Component  {
                     />
                 </Switch> */}
                 <Suspense fallback={<Spinner />}>  
-                    <Switch>
-                        <Route 
-                            path='/Burger_APP/Checkout'
-                            component={LazyCheckout}
-                        />
-                        <Route 
-                            path='/Orders'
-                            component={LazyOrders}
-                        />
-
-                        <Route 
-                            path='/Auth'
-                            component={Auth}
-                        />
-
-                        <Route 
-                            exact
-                            path='/Burger_APP/'
-                            component={BurgerBuilder}
-                        />
-
-                        <Redirect to="/Burger_APP/"/>
-                    </Switch>
+                    {AvailableRoutes}
                 </Suspense>
                 
 
@@ -92,5 +118,11 @@ class Layout extends Component  {
     }
 };
 
+const mapStateToProps = state => {
+    return {
+        loggedIn: state.auth.loggedIn,
+    }
+}
 
-export default Layout;
+
+export default withRouter(connect(mapStateToProps)(Layout));

@@ -30,7 +30,6 @@ class Auth extends Component{
 
     authenticate = (userData) =>{
         //User data contains: token, user ID.
-
         //Update the localStorage with this info.
         localStorage.setItem('userId', userData.localId);
         localStorage.setItem('token' , userData.idToken);

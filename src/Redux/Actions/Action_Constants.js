@@ -8,3 +8,4 @@ export const INIT_INGREDIENTS_START  = 'INIT_INGREDIENTS_START';
 
 //Authentication actions.
 export const LOG_IN  = 'LOG_IN';
+export const LOG_OUT  = 'LOG_OUT';
