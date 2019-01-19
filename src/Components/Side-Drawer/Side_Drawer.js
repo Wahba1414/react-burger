@@ -1,4 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+import {withRouter} from "react-router-dom";
+
 
 import Classes from './Side_Drawer.css';
 
@@ -15,16 +19,30 @@ function sideDrawer (props) {
                             Burger Builder
                         </NavLink>
                     </li>
-                    <li>
-                        <NavLink activeClassName={Classes['Is-Active']} to='/Orders'>
+
+                    {props.loggedIn ? <li>
+                        <NavLink  activeClassName={Classes['Is-Active']} to='/Orders'>
                             Orders
                         </NavLink>
+                    </li> : null}
+
+                    <li>
+                        <NavLink  activeClassName={Classes['Is-Active']} to='/Auth'>
+                            {props.loggedIn ? 'Log Out' : 'Authentication'  }
+                        </NavLink>
                     </li>
+
+
                 </ul>
             </div>
         </div>
     )
 };
 
+const mapStateToProps = state => {
+    return {
+        loggedIn: state.auth.loggedIn,
+    }
+}
 
-export default sideDrawer;
+export default withRouter(connect(mapStateToProps)(sideDrawer));
