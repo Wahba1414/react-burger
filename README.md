@@ -1,5 +1,5 @@
 ## Description
-This project is a nice and funny app to build your burger and order it:). This app is built using React.js and use
+This project is a nice and funny app to build your burger and order it :). This app is built using React.js and use
 'Firebase' as its back-end server to manage authentication and database. This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 
