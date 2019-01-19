@@ -182,6 +182,10 @@ class UserDetails extends Component{
         
     }
 
+    cancelCheckout = () =>{
+        this.props.history.push('/');
+    }
+
     componentDidMount (){
         // console.log("[Inside componentDidMount function]");
         this.textInput.current.focus();
@@ -216,14 +220,23 @@ class UserDetails extends Component{
                 {/* form details */}
                 <form className={Classes['User-Details-Form']}>
                     {formDom}
-                    <Button 
-                        disable = {!this.state.enableOrdering}
-                        extraClass={Classes['Checkout']} 
-                        type='Action' 
-                        clicked={this.submitOrder}
-                    >
-                    Order
-                    </Button>
+                    <div className={Classes['Buttons-List']}>
+                        <Button 
+                            extraClass={Classes['Checkout']} 
+                            type='Danger' 
+                            clicked={this.cancelCheckout}
+                        >
+                        Back
+                        </Button>
+                        <Button 
+                            disable = {!this.state.enableOrdering}
+                            extraClass={Classes['Checkout']} 
+                            type='Success' 
+                            clicked={this.submitOrder}
+                        >
+                        Order
+                        </Button>
+                    </div>
                 </form>
             </div>
         )

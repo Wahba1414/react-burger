@@ -45,3 +45,9 @@
     font-size: 20px;
     margin: 10px 0;
 }
+
+.Buttons-List{
+    display: flex;
+    padding: 0 20%;
+    justify-content: space-between;
+}

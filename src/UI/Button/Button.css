@@ -18,6 +18,11 @@
     background-color: rgb(6, 49, 7);
 }
 
+.Success:disabled {
+    background-color: gray;
+    cursor: not-allowed;
+}
+
 
 .Success-Transparent{
     background-color: transparent;
