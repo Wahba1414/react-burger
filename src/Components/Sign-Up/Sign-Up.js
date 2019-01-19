@@ -1,8 +1,15 @@
 import React , {Component} from 'react';
 
+import {SignUp_Axios} from '../../Utilis/Axios/Auth_instance';
+
+import WithErrorHandling from '../../HOC/Error_Handling/withErrorHandling';
+
+import Spinner from '../../Utilis/Spinner/Spinner';
+
 import Classes from './Sign-Up.css';
 
 import Button from '../../UI/Button/Button';
+
 
 class SignIn extends Component{
     constructor(props) {
@@ -34,39 +41,45 @@ class SignIn extends Component{
                 valid: true,
                 touched: false,
             },
-            'Name' : {
-                value: '',
-                configs:{
-                    'type': 'text',
-                    'placeholder'  : 'Your Name ..'
-                },
-                valid: true,
-                touched: false,
-            },
 
-            'Address' : {
-                value: '',
-                configs:{
-                    'type': 'text',
-                    'placeholder'  : 'Your Address ..'
-                },
-                valid: true,
-                touched: false,
-            },
+            /*
+            -The following form fields will be Ignored for now because the used backend here is the firebase (simple for learning aspects) and it deals only with E-mail & Password.
+            -But for the real apps we can add them for sure to keep the user's data which needed for next orders.
+            */
 
-            'Number' : {
-                value: '',
-                configs:{
-                    'type': 'text',
-                    'placeholder'  : 'Your Phone Number ..'
-                },
-                valid: true,
-                touched: false,
-            }
+            // 'Name' : {
+            //     value: '',
+            //     configs:{
+            //         'type': 'text',
+            //         'placeholder'  : 'Your Name ..'
+            //     },
+            //     valid: true,
+            //     touched: false,
+            // },
+
+            // 'Address' : {
+            //     value: '',
+            //     configs:{
+            //         'type': 'text',
+            //         'placeholder'  : 'Your Address ..'
+            //     },
+            //     valid: true,
+            //     touched: false,
+            // },
+
+            // 'Number' : {
+            //     value: '',
+            //     configs:{
+            //         'type': 'text',
+            //         'placeholder'  : 'Your Phone Number ..'
+            //     },
+            //     valid: true,
+            //     touched: false,
+            // }
         },
 
-        enableOrdering: false,
-        purchasing: false,
+        enableSigningUp: false,
+        signingUp : false
     };
 
     //Invalid styles.
@@ -83,7 +96,7 @@ class SignIn extends Component{
 
         switch(key){
             case 'E-mail':
-                var emailRegex = new  RegExp(/^((\+1)|1)? ?\(?(\d{3})\)?[ .-]?(\d{3})[ .-]?(\d{4})( ?(ext\.? ?|x)(\d*))?$/);
+                var emailRegex = new  RegExp(/^\S+@\S+$/);
                 isvalid = emailRegex.test(trimedValue)
                 break;
             
@@ -95,26 +108,26 @@ class SignIn extends Component{
                 }
                 break;
 
-            case 'Name':
-                if(trimedValue.length >= 6){
-                    isvalid = true;
-                }else{
-                    isvalid = false;
-                }
-                break;
+            // case 'Name':
+            //     if(trimedValue.length >= 6){
+            //         isvalid = true;
+            //     }else{
+            //         isvalid = false;
+            //     }
+            //     break;
 
-            case 'Address': 
-                if(trimedValue.length >= 15){
-                    isvalid = true;
-                }else{
-                    isvalid = false;
-                }
-                break;
+            // case 'Address': 
+            //     if(trimedValue.length >= 15){
+            //         isvalid = true;
+            //     }else{
+            //         isvalid = false;
+            //     }
+            //     break;
 
-            case 'Number': 
-                var phoneRegex = new  RegExp(/^((\+1)|1)? ?\(?(\d{3})\)?[ .-]?(\d{3})[ .-]?(\d{4})( ?(ext\.? ?|x)(\d*))?$/);
-                isvalid = phoneRegex.test(trimedValue)
-                break;
+            // case 'Number': 
+            //     var phoneRegex = new  RegExp(/^((\+1)|1)? ?\(?(\d{3})\)?[ .-]?(\d{3})[ .-]?(\d{4})( ?(ext\.? ?|x)(\d*))?$/);
+            //     isvalid = phoneRegex.test(trimedValue)
+            //     break;
 
             default: 
                 break;    
@@ -137,15 +150,15 @@ class SignIn extends Component{
         stateSnapshot.form[key].touched = true;
 
         //Ready for enabling ordering.
-        var enableOrdering = true;
+        var enableSigningUp = true;
         for(let item in stateSnapshot.form){
             if ( !(stateSnapshot.form[item].touched && stateSnapshot.form[item].valid) ){
-                enableOrdering = false;
+                enableSigningUp = false;
             }
         };
 
         
-        stateSnapshot.enableOrdering = enableOrdering;
+        stateSnapshot.enableSigningUp = enableSigningUp;
        
         this.setState({stateSnapshot});
     }
@@ -153,6 +166,38 @@ class SignIn extends Component{
     componentDidMount (){
         console.log("[Inside componentDidMount function]");
         this.textInput.current.focus();
+    }
+
+    signUp = (event) => {
+        event.preventDefault();
+ 
+        //Sending order inprogress...
+        var stateSnapshot = this.state;
+        stateSnapshot.signingUp = true;
+        this.setState({stateSnapshot});
+
+        var userData = {
+            email: this.state.form["E-mail"].value,
+            password: this.state.form['Password'].value,
+            returnSecureToken: true
+        };
+
+        SignUp_Axios.post('',userData).then((response) => {
+            console.log('succeeded');
+            this.props.history.push('/');
+
+            //store the token and its timeout inside the localstorage.
+            //update the global flag 'authenitcated' with true (redux).
+
+
+        }).catch((error) =>{
+            //Nothing for now.
+            var stateSnapshot = this.state;
+            stateSnapshot.signingUp = false;
+            this.setState({stateSnapshot});
+        })
+
+
     }
 
     render =  () => {
@@ -176,17 +221,17 @@ class SignIn extends Component{
             )
         });
 
-        var elementsToRender = (
+        var elementsToRender = this.state.signingUp ? (<Spinner />) : (
             <div className={Classes['Sign-Up']}>
                 {/* form details */}
                 <form className={Classes['Sign-Up-Form']}>
                     {formDom}
                     <div>
                         <Button 
-                            disable = {!this.state.enableOrdering}
+                            disable = {!this.state.enableSigningUp}
                             extraClass={Classes['Checkout']} 
                             type='Success-Transparent' 
-                            clicked={this.submitOrder}
+                            clicked={this.signUp}
                         >
                         Sign up
                         </Button>
@@ -210,4 +255,4 @@ class SignIn extends Component{
     }
 }
 
-export default SignIn;
+export default WithErrorHandling(SignIn,SignUp_Axios);

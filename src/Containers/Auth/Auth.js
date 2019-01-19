@@ -23,15 +23,18 @@ class Auth extends Component{
         });
     }
 
+
     render (){
         var elementsToRender = (this.state.SingInOrSignUp === 'SignIn') ? (
             <SignIn
                 switchToSignUp={this.switchToSignUp}
+                history = {this.props.history}
             > 
             </SignIn>
         ) :(
             <SingUp
                 switchToSignIn={this.switchToSignIn}
+                history = {this.props.history}
             >
             </SingUp>
         );

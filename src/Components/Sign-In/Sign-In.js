@@ -1,5 +1,9 @@
 import React , {Component} from 'react';
 
+import {SignIn_Axios} from '../../Utilis/Axios/Auth_instance';
+
+import Spinner from '../../Utilis/Spinner/Spinner';
+
 import Classes from './Sign-In.css';
 
 import Button from '../../UI/Button/Button';
@@ -36,8 +40,8 @@ class SignIn extends Component{
             },
         },
 
-        enableOrdering: false,
-        purchasing: false,
+        enableSigningIn: false,
+        signingIn: false,
     };
 
     //Invalid styles.
@@ -54,7 +58,7 @@ class SignIn extends Component{
 
         switch(key){
             case 'E-mail':
-                var emailRegex = new  RegExp(/^((\+1)|1)? ?\(?(\d{3})\)?[ .-]?(\d{3})[ .-]?(\d{4})( ?(ext\.? ?|x)(\d*))?$/);
+                var emailRegex = new  RegExp(/^\S+@\S+$/);
                 isvalid = emailRegex.test(trimedValue)
                 break;
             
@@ -87,15 +91,15 @@ class SignIn extends Component{
         stateSnapshot.form[key].touched = true;
 
         //Ready for enabling ordering.
-        var enableOrdering = true;
+        var enableSigningIn = true;
         for(let item in stateSnapshot.form){
             if ( !(stateSnapshot.form[item].touched && stateSnapshot.form[item].valid) ){
-                enableOrdering = false;
+                enableSigningIn = false;
             }
         };
 
         
-        stateSnapshot.enableOrdering = enableOrdering;
+        stateSnapshot.enableSigningIn = enableSigningIn;
        
         this.setState({stateSnapshot});
     }
@@ -103,6 +107,39 @@ class SignIn extends Component{
     componentDidMount (){
         console.log("[Inside componentDidMount function]");
         this.textInput.current.focus();
+    }
+
+
+    signIn = (event) => {
+        event.preventDefault();
+ 
+        //Sending order inprogress...
+        var stateSnapshot = this.state;
+        stateSnapshot.signingIn = true;
+        this.setState({stateSnapshot});
+
+        var userData = {
+            email : this.state.form["E-mail"].value,
+            password : this.state.form['Password'].value,
+            returnSecureToken: true
+        };
+
+        SignIn_Axios.post('',userData).then((response) => {
+            console.log('succeeded');
+            this.props.history.push('/');
+
+            //store the token and its timeout inside the localstorage.
+            //update the global flag 'authenitcated' with true (redux).
+
+
+        }).catch((error) =>{
+            //Nothing for now.
+            var stateSnapshot = this.state;
+            stateSnapshot.signingIn = false;
+            this.setState({stateSnapshot});
+        })
+
+
     }
 
     render =  () => {
@@ -114,7 +151,7 @@ class SignIn extends Component{
         keys.forEach((key) => {
             formDom.push(
                 <div key={key}  className={Classes['Form-Item']}> 
-                    <label>{key}</label>
+                    <label>{key} *</label>
                     <input
                     ref={(key === keys[0]) ? this.textInput: null} 
                     {...this.state.form[key].configs} 
@@ -126,17 +163,17 @@ class SignIn extends Component{
             )
         });
 
-        var elementsToRender = (
+        var elementsToRender = this.state.signingIn ? (<Spinner />) :(
             <div className={Classes['Sign-In']}>
                 {/* form details */}
                 <form className={Classes['Sign-In-Form']}>
                     {formDom}
                     <div>
                         <Button 
-                            disable = {!this.state.enableOrdering}
+                            disable = {!this.state.enableSigningIn}
                             extraClass={Classes['Checkout']} 
                             type='Success-Transparent' 
-                            clicked={this.submitOrder}
+                            clicked={this.signIn}
                         >
                         Sign in
                         </Button>

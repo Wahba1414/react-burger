@@ -152,7 +152,7 @@ class UserDetails extends Component{
         }, (error) => {
             //reset back.
             var stateSnapshot = this.state;
-            stateSnapshot.purchasing = true;
+            stateSnapshot.purchasing = false;
             this.setState({stateSnapshot});
         });
     }
