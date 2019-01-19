@@ -14,6 +14,13 @@ class Auth extends Component{
         SingInOrSignUp: 'SignIn'
     };
 
+    componentDidMount (){
+        //Dispatching 'Log out' action.
+        this.props.loggedOut();
+        //clear localStorage.
+        localStorage.clear();
+    }
+
     switchToSignIn = (event) => {
         event.preventDefault();
         this.setState({
@@ -82,6 +89,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
       loggedIn: () => dispatch(Actions.logIn()), 
+      loggedOut: () => dispatch(Actions.logOut()), 
     };
   }
 

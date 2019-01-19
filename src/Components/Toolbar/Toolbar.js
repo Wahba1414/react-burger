@@ -39,7 +39,7 @@ function toolbar (props) {
 
                     <li>
                         <NavLink  activeClassName={Classes['Is-Active']} to='/Auth'>
-                            Authentication
+                            {props.loggedIn ? 'Log Out' : 'Authentication'  }
                         </NavLink>
                     </li>
                 </ul>
