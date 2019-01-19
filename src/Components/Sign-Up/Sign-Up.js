@@ -156,7 +156,7 @@ class SignIn extends Component{
     }
 
     render =  () => {
-        console.log(this.props);
+        // console.log(this.props);
         var formDom = [];
 
         //preparing the form dom elements.
@@ -195,7 +195,7 @@ class SignIn extends Component{
                         <Button 
                             extraClass={Classes['Checkout']} 
                             type='Danger-Transparent' 
-                            clicked={this.submitOrder}
+                            clicked={this.props.switchToSignIn}
                         >
                         Already have an account
                         </Button>
