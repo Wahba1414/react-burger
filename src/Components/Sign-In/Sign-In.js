@@ -105,7 +105,7 @@ class SignIn extends Component{
     }
 
     componentDidMount (){
-        console.log("[Inside componentDidMount function]");
+        // console.log("[Inside componentDidMount function]");
         this.textInput.current.focus();
     }
 
@@ -125,8 +125,8 @@ class SignIn extends Component{
         };
 
         SignIn_Axios.post('',userData).then((response) => {
-            console.log('succeeded' , response);
-            this.props.history.push('/');
+            // console.log('succeeded' , response);
+            this.props.history.push('/Burger_APP/Checkout');
 
             //store the token and its timeout inside the localstorage.
             //update the global flag 'authenitcated' with true (redux).

@@ -10,6 +10,13 @@ import UserDetails from '../../Components/User Details/User_Details';
 import Classes from './Checkout.css';
 
 class Checkout extends Component  {
+
+    componentWillMount() {
+        if( (!this.props.ingredients) || (this.props.ingredients.length == 0) ){
+            this.props.history.push('/');
+        }
+    }
+
     render () {
         
         return(

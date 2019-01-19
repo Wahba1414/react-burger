@@ -164,7 +164,7 @@ class SignIn extends Component{
     }
 
     componentDidMount (){
-        console.log("[Inside componentDidMount function]");
+        // console.log("[Inside componentDidMount function]");
         this.textInput.current.focus();
     }
 
@@ -183,7 +183,7 @@ class SignIn extends Component{
         };
 
         SignUp_Axios.post('',userData).then((response) => {
-            console.log('succeeded');
+            // console.log('succeeded');
             this.props.history.push('/');
 
             //store the token and its timeout inside the localstorage.

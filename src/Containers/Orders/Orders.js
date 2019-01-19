@@ -55,7 +55,7 @@ class Orders extends Component{
                     order = {data[id]}>
                 </Order>)
         }
-        console.log('order: ' , orders);
+        // console.log('order: ' , orders);
         return orders;
     }
 
