@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import Classes from './Toolbar.css';
 
@@ -27,11 +28,12 @@ function toolbar (props) {
                             Burger Builder
                         </NavLink>
                     </li>
-                    <li>
+                    
+                    {props.loggedIn ? <li>
                         <NavLink  activeClassName={Classes['Is-Active']} to='/Orders'>
                             Orders
                         </NavLink>
-                    </li>
+                    </li> : null}
 
                     <li>
                         <NavLink  activeClassName={Classes['Is-Active']} to='/Auth'>
@@ -44,4 +46,10 @@ function toolbar (props) {
     )
 };
 
-export default toolbar;
+const mapStateToProps = state => {
+    return {
+        loggedIn: state.auth.loggedIn,
+    }
+}
+
+export default connect(mapStateToProps)(toolbar);
