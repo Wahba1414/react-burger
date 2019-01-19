@@ -125,12 +125,12 @@ class SignIn extends Component{
         };
 
         SignIn_Axios.post('',userData).then((response) => {
-            console.log('succeeded');
+            console.log('succeeded' , response);
             this.props.history.push('/');
 
             //store the token and its timeout inside the localstorage.
             //update the global flag 'authenitcated' with true (redux).
-
+            this.props.authenticate(response.data);
 
         }).catch((error) =>{
             //Nothing for now.

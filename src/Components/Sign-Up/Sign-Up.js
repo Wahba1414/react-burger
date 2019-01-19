@@ -188,7 +188,7 @@ class SignIn extends Component{
 
             //store the token and its timeout inside the localstorage.
             //update the global flag 'authenitcated' with true (redux).
-
+            this.props.authenticate(response.data);
 
         }).catch((error) =>{
             //Nothing for now.

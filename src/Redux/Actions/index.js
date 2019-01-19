@@ -7,3 +7,9 @@ export {
 } from './Ingredients_Actions';
 
 
+//Export the Auth' action creators.
+export {
+    logIn    
+} from './Auth_Actions';
+
+
